@@ -1,6 +1,6 @@
 {
   "name": "@hereafter/tdc",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A data conversion library for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "class transform"
+    "convert transform object decorator"
   ],
   "author": "hereafter",
   "license": "MIT license",
