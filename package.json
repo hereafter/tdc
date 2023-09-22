@@ -12,7 +12,7 @@
     "class transform"
   ],
   "author": "hereafter",
-  "license": "ISC",
+  "license": "MIT license",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
