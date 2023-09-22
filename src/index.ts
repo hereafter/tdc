@@ -1,2 +1,2 @@
-export { TestClass } from "./decorators/test";
+export { fnHello } from "./test";
 
