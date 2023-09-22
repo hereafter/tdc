@@ -1,6 +1,6 @@
 import { DMeta } from "./dmeta";
 import { DMetaKnownNames } from "./dmeta.names";
-import { DConstructor, DMetaClass, DMetaName, DScope } from "./dmeta.object";
+import { DConstructor, DMetaClass, DMetaConverter, DMetaName, DScope } from "./dmeta.object";
 
 export function convert<T extends object, S extends object>(
   constructor: DConstructor<T>,
@@ -29,6 +29,8 @@ export function convert<T extends object, S extends object>(
       key,
       scopeValue
     );
+
+    const metaConverter=DMeta.findMetaObject<DMetaConverter<T>>(DMetaKnownNames.CONVERTER, ptype, key, scopeValue);
 
     const metaClass = DMeta.findMetaObject<DMetaClass<T>>(
       DMetaKnownNames.CLASS,
@@ -62,6 +64,11 @@ export function convert<T extends object, S extends object>(
     } else {
       value = data[metaName.name];
     }
+
+    if(metaConverter?.fn!=null) {
+      value = metaConverter.fn(value, metaConverter.options);
+    }
+
     Reflect.set(obj, key, value);
   }
 
