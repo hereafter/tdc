@@ -4,7 +4,8 @@ import { DConstructor, DMetaClass, DMetaName, DScope } from "./dmeta.object";
 
 export function convert<T extends object, S extends object>(
   constructor: DConstructor<T>,
-  data: never,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any,
   scope: DScope<S> = null
 ): T | null {
   if (data == null) return null;
@@ -39,7 +40,7 @@ export function convert<T extends object, S extends object>(
     let value: unknown | null = null;
 
     if (metaClass?.fn != null) {
-      let temp: never | null = null;
+      let temp: unknown|null = null;
       if (metaName?.name == null) {
         temp = data[key];
       } else {
