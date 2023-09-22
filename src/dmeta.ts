@@ -6,7 +6,7 @@ export class DMeta {
     metaName: string,
     target: object,
     key: string | symbol
-  ): Array<T> | null {
+  ): Array<T> {
     let data = Reflect.getMetadata(metaName, target, key);
     if (data == null) {
       data = new Array<T>();

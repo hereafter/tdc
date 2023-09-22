@@ -1,2 +1,4 @@
-export { fnHello } from "./test";
+export { fnHello } from "./test"; 
+export {DName} from "./decorators";
+
 
