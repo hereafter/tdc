@@ -1,5 +1,5 @@
 import { DMeta } from "../dmeta";
-import { DMetaKnownNames } from "../dmeta.names";
+import { DMetaKnownNames } from "../dmeta.values";
 import { DMetaName, DScope } from "../dmeta.object";
 
 export function DName(name: string, scope: DScope = null) {

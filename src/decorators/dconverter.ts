@@ -1,5 +1,5 @@
 import { DMeta } from "../dmeta";
-import { DMetaKnownNames } from "../dmeta.names";
+import { DMetaKnownNames } from "../dmeta.values";
 import { DConvertFn, DMetaConverter, DScope } from "../dmeta.object";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

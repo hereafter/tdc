@@ -1,5 +1,5 @@
 import { DMeta } from "./dmeta";
-import { DMetaKnownNames } from "./dmeta.names";
+import { DMetaKnownNames } from "./dmeta.values";
 import { DConstructor, DMetaClass, DMetaConverter, DMetaName, DScope } from "./dmeta.object";
 
 export function convert<T extends object, S extends object>(
