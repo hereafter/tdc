@@ -9,7 +9,7 @@ export type DConvertFn<T, S = any, O = any> = (
 ) => T | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DValidateFn<T, O=any> = (value: T|null, options?: O) => string|null;
+export type DValidateFn<O=any> = (value: any|null, options?: O) => string|null;
 
 export class DMetaObject {
   scope: DScope = null;
@@ -30,7 +30,7 @@ export class DMetaConverter<T, S = any, O = any> extends DMetaObject {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class DMetaValidator<T, O = any> extends DMetaObject {
-  validators: Array<DValidateFn<T>> = [];
+export class DMetaValidator<O = any> extends DMetaObject {
+  validators: Array<DValidateFn> = [];
   options: O | null = null;
 }

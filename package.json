@@ -1,6 +1,6 @@
 {
   "name": "@hereafter/tdc",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "A data conversion library for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

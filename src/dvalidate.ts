@@ -32,8 +32,9 @@ export function validate<T extends object, S extends object>(
     if (metaValidators == null || metaValidators.validators.length === 0)
       continue;
 
+    const value=Reflect.get(data, key);
     for (const validator of metaValidators.validators) {
-      const r = validator(data);
+      const r = validator(value);
       if (r == null || r === "") continue;
       result.set(key, r);
     }
