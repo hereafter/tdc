@@ -7,4 +7,11 @@ export class DMetaKnownNames {
 
 export class DValidateErrors {
   static readonly NotNull = "The value should not be null";
+  static readonly MinValue = "The value must be at least {0}";
+  static readonly MaxValue = "The value must be at most {0}";
+  static readonly GreaterThan = "The value must be greater than {0}";
+  static readonly LessThan = "The value must be less than {0}";
+  static readonly EqualTo = "The value must be equal to {0}";
+  static readonly GreaterThanOrEqualTo = "The value must be equal to or greater than {0}";
+  static readonly LessThanOrEqualTo = "The value must be equal to or less than {0}";
 }
