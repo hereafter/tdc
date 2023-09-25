@@ -14,4 +14,5 @@ export class DValidateErrors {
   static readonly EqualTo = "The value must be equal to {0}";
   static readonly GreaterThanOrEqualTo = "The value must be equal to or greater than {0}";
   static readonly LessThanOrEqualTo = "The value must be equal to or less than {0}";
+  static readonly Pattern="The value does not match pattern {0}";
 }

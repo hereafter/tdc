@@ -80,3 +80,12 @@ export function VEqualTo(v:number) {
     return '';
   });
 }
+
+export function VPattern(pattern: RegExp) {
+  return DValidate((value: string) => {
+    if (!pattern.test(value)) {
+      return DValidateErrors.Pattern.replace("{0}", pattern.source);
+    }
+    return "";
+  });
+}
