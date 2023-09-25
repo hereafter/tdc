@@ -1,6 +1,12 @@
 import { DMeta } from "./dmeta";
 import { DMetaKnownNames } from "./dmeta.values";
-import { DConstructor, DMetaClass, DMetaConverter, DMetaName, DScope } from "./dmeta.object";
+import {
+  DConstructor,
+  DMetaClass,
+  DMetaConverter,
+  DMetaName,
+  DScope,
+} from "./dmeta.object";
 
 export function convert<T extends object, S extends object>(
   constructor: DConstructor<T>,
@@ -30,7 +36,12 @@ export function convert<T extends object, S extends object>(
       scopeValue
     );
 
-    const metaConverter=DMeta.findMetaObject<DMetaConverter<T>>(DMetaKnownNames.CONVERTER, ptype, key, scopeValue);
+    const metaConverter = DMeta.findMetaObject<DMetaConverter<T>>(
+      DMetaKnownNames.CONVERTER,
+      ptype,
+      key,
+      scopeValue
+    );
 
     const metaClass = DMeta.findMetaObject<DMetaClass<T>>(
       DMetaKnownNames.CLASS,
@@ -42,7 +53,7 @@ export function convert<T extends object, S extends object>(
     let value: unknown | null = null;
 
     if (metaClass?.fn != null) {
-      let temp: unknown|null = null;
+      let temp: unknown | null = null;
       if (metaName?.name == null) {
         temp = data[key];
       } else {
@@ -58,6 +69,8 @@ export function convert<T extends object, S extends object>(
           }
         }
         value = vs;
+      } else {
+        value = convert(metaClass.fn, temp);
       }
     } else if (metaName?.name == null) {
       value = data[key];
@@ -65,7 +78,7 @@ export function convert<T extends object, S extends object>(
       value = data[metaName.name];
     }
 
-    if(metaConverter?.fn!=null) {
+    if (metaConverter?.fn != null) {
       value = metaConverter.fn(value, metaConverter.options);
     }
 
