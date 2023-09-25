@@ -39,5 +39,22 @@ export function validate<T extends object, S extends object>(
     }
   }
 
+  if(!result.isDataValid && DMeta.isValidationLogsOn) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    console.warn(`<!> VALIDATION FAILED:\n ${(data as any)?.constructor?.name??(typeof data)}`);
+
+    const index=1;
+    for (const m of result) {
+      console.warn(`${index}/${result.size}: ${m[0]} ${m[1]}`);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.warn(`${(data as any)[m[0]]}`);
+    }
+    
+  }
   return result;
+}
+
+
+export function enableValiationLogs(on: boolean=true) {
+  DMeta.isValidationLogsOn = on;
 }

@@ -6,4 +6,4 @@ export { convert } from "./dconvert";
 
 export { DValidate } from "./decorators/dvalidator";
 export { VNotNull } from "./validators/common";
-export { validate } from "./dvalidate";
+export { validate, enableValiationLogs } from "./dvalidate";

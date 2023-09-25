@@ -2,6 +2,9 @@ import "reflect-metadata";
 import { DMetaObject } from "./dmeta.object";
 
 export class DMeta {
+
+  static isValidationLogsOn = true;
+
   static getMetaObjects<T extends DMetaObject>(
     metaName: string,
     target: object,
