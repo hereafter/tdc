@@ -4,7 +4,7 @@ import { DConstructor, DMetaClass, DScope } from "../dmeta.object";
 
 export function DClass<T extends object>(
   t: DConstructor<T>,
-  scope: DScope,
+  scope: DScope = null
 ) {
   return function (target: object, key: string) {
     const metas = DMeta.getMetaObjects<DMetaClass<T>>(
