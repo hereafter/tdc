@@ -1,6 +1,11 @@
 import { DMeta } from "./dmeta";
 import { DMetaKnownNames } from "./dmeta.values";
-import { DConstructor, DMetaValidator, DScope } from "./dmeta.object";
+import {
+  DConstructor,
+  DMetaClass,
+  DMetaValidator,
+  DScope,
+} from "./dmeta.object";
 
 export class DValidateResult extends Map<string, string> {
   get isDataValid() {
@@ -29,10 +34,33 @@ export function validate<T extends object, S extends object>(
       scopeValue
     );
 
+    const metaClass = DMeta.findMetaObject<DMetaClass<T>>(
+      DMetaKnownNames.CLASS,
+      data,
+      key,
+      scopeValue
+    );
+
+   
+
+    const value = Reflect.get(data, key);
+
+    if (metaClass?.fn != null) {
+      if (Array.isArray(value)) {
+        for (const v of value) {
+          if (typeof v === "object") {
+            validate(v, scope);
+          }
+        }
+      } else if (typeof value === "object") {
+        validate(value as T, scope);
+      }
+      return result;
+    }
+
     if (metaValidators == null || metaValidators.validators.length === 0)
       continue;
 
-    const value=Reflect.get(data, key);
     for (const validator of metaValidators.validators) {
       const r = validator(value);
       if (r == null || r === "") continue;
@@ -40,21 +68,24 @@ export function validate<T extends object, S extends object>(
     }
   }
 
-  if(!result.isDataValid && DMeta.isValidationLogsOn) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    console.warn(`<!> VALIDATION FAILED: ${(data as any)?.constructor?.name??(typeof data)}`);
-    const index=1;
+  if (!result.isDataValid && DMeta.isValidationLogsOn) {
+    
+    console.warn(
+      `<!> VALIDATION FAILED: ${
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (data as any)?.constructor?.name ?? typeof data
+      }`
+    );
+    const index = 1;
     for (const m of result) {
       console.warn(`${index}/${result.size}: ${m[0]} ${m[1]}`);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       console.warn(`  value: ${(data as any)[m[0]]}`);
     }
-    
   }
   return result;
 }
 
-
-export function enableValiationLogs(on: boolean=true) {
+export function enableValiationLogs(on: boolean = true) {
   DMeta.isValidationLogsOn = on;
 }
