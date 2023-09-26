@@ -41,8 +41,6 @@ export function validate<T extends object, S extends object>(
       scopeValue
     );
 
-   
-
     const value = Reflect.get(data, key);
 
     if (metaClass?.fn != null) {
@@ -55,7 +53,7 @@ export function validate<T extends object, S extends object>(
       } else if (typeof value === "object") {
         validate(value as T, scope);
       }
-      return result;
+      continue;
     }
 
     if (metaValidators == null || metaValidators.validators.length === 0)

@@ -7,7 +7,7 @@ import { VMax, VMin } from '../validators/common';
 
 const data = {
   first: {
-    a:"12", b:"13"
+    a:"123", b:"13"
   },
   second: {
     b:"15", a:"16"
@@ -41,7 +41,7 @@ describe('hello', () => {
   });
 });
 
-describe('hello', () => {
+describe('data', () => {
   it('DClass', () => {
     const v=convert(DData, data);
     console.log(v);
