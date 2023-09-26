@@ -20,7 +20,7 @@ export class DTest {
   @VMin(100)
   x: number = 0;
 
-  @DName('b')
+  @DName('b')  
   @VMax(1000)
   @DConvert((v)=>Number.parseInt(v))
   y: number = 0;
@@ -35,19 +35,12 @@ export class DData {
   second: DTest | null = null;
 }
 
-describe('hello', () => {
-  it('say hello world', () => {
-    console.log('hello world')
-  });
-});
 
 describe('data', () => {
   it('DClass', () => {
     const v=convert(DData, data);
     console.log(v);
-
     validate(v!);
-    
   });
 });
 
