@@ -8,16 +8,16 @@ import {
   DScope,
 } from "./dmeta.object";
 
-export function convert<T extends object, S extends object>(
-  constructor: DConstructor<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function convertTo<T extends object, S extends object>(
+  obj: T,
   data: any,
   scope: DScope<S> = null
-): T | null {
-  if (data == null) return null;
+) {
+  if (data == null) return;
 
-  const ptype = constructor.prototype;
-  if (ptype == null) return null;
+  const ptype = Object.getPrototypeOf(obj);
+  if (ptype == null) return;
 
   let scopeValue: string | null = null;
   if ((scope as DConstructor)?.name != null) {
@@ -25,8 +25,6 @@ export function convert<T extends object, S extends object>(
   } else {
     scopeValue = scope as string;
   }
-
-  const obj = new constructor();
 
   for (const key in obj) {
     const metaName = DMeta.findMetaObject<DMetaName>(
@@ -84,6 +82,15 @@ export function convert<T extends object, S extends object>(
 
     Reflect.set(obj, key, value);
   }
+}
 
+export function convert<T extends object, S extends object>(
+  constructor: DConstructor<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any,
+  scope: DScope<S> = null
+): T | null {
+  const obj = new constructor();
+  convertTo(obj, data, scope);
   return obj;
 }
