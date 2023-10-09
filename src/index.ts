@@ -1,6 +1,7 @@
 export { DClass } from "./decorators/dclass";
 export { DName } from "./decorators/dname";
 export { DConvert } from "./decorators/dconverter";
+export { DIgnore} from "./decorators/dignore";
 
 export { convert, convertTo } from "./dconvert";
 
