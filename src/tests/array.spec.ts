@@ -16,9 +16,9 @@ describe('Array data serializations', () => {
 
     const v=convert(DData, data);
     
-    expect(v!=null);
-    expect(v?.name==='Hot Iron');
-    expect(v?.lut[2]===1);
+    expect(v!=null).toBeTrue();
+    expect(v?.name==='Hot Iron').toBeTrue();
+    expect(v?.lut[2]===4).toBeTrue();
 
 
   });

@@ -3,6 +3,7 @@ export class DMetaKnownNames {
   static readonly CLASS: string = "@data-class";
   static readonly CONVERTER: string = "@data-converter";
   static readonly VALIDATOR: string = "@data-validator";
+  static readonly IGNORE: string = "@data-ignore";
 }
 
 export class DValidateErrors {
@@ -14,5 +15,5 @@ export class DValidateErrors {
   static readonly EqualTo = "The value must be equal to {0}";
   static readonly GreaterThanOrEqualTo = "The value must be equal to or greater than {0}";
   static readonly LessThanOrEqualTo = "The value must be equal to or less than {0}";
-  static readonly Pattern="The value does not match pattern {0}";
+  static readonly Pattern = "The value does not match pattern {0}";
 }

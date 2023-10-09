@@ -5,6 +5,7 @@ import {
   DMetaClass,
   DMetaConverter,
   DMetaName,
+  DMetaObject,
   DScope,
 } from "./dmeta.object";
 
@@ -27,6 +28,14 @@ export function convertTo<T extends object, S extends object>(
   }
 
   for (const key in obj) {
+    const ignore=DMeta.findMetaObject<DMetaObject>(
+      DMetaKnownNames.IGNORE,
+      ptype, key, scopeValue);    
+      
+    if(ignore!=null) {
+      continue;
+    }
+
     const metaName = DMeta.findMetaObject<DMetaName>(
       DMetaKnownNames.NAME,
       ptype,
@@ -47,6 +56,8 @@ export function convertTo<T extends object, S extends object>(
       key,
       scopeValue
     );
+
+    
 
     let value: unknown | null = null;
 
