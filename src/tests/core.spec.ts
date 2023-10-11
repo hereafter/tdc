@@ -27,7 +27,7 @@ describe('Core functions', () => {
 
      const target=new DData();
      convertTo(target, data1);
-     convertTo(target, data2, DData);
+     convertTo(target, data2);
 
      expect(target.name).toBe('hello');
      

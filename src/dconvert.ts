@@ -9,7 +9,6 @@ import {
   DScope,
 } from "./dmeta.object";
 
-
 export function convertTo<T extends object, S extends object>(
   obj: T,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,11 +28,14 @@ export function convertTo<T extends object, S extends object>(
   }
 
   for (const key in obj) {
-    const ignore=DMeta.findMetaObject<DMetaObject>(
+    const ignore = DMeta.findMetaObject<DMetaObject>(
       DMetaKnownNames.IGNORE,
-      ptype, key, scopeValue);    
-      
-    if(ignore!=null) {
+      ptype,
+      key,
+      scopeValue
+    );
+
+    if (ignore != null) {
       continue;
     }
 
@@ -58,40 +60,40 @@ export function convertTo<T extends object, S extends object>(
       scopeValue
     );
 
-    
-
-    let value: unknown | null = null;
+    let value: unknown | null | undefined = undefined;
 
     if (metaClass?.fn != null) {
       let temp: unknown | null = null;
       if (metaName?.name == null) {
-        if(data[key]!==undefined) {
+        if (data[key] !== undefined) {
           temp = data[key];
         }
       } else {
-        if(data[metaName.name]!==undefined) {
+        if (data[metaName.name] !== undefined) {
           temp = data[metaName.name];
         }
       }
 
-      if (Array.isArray(temp)) {
-        const vs = new Array<T>();
-        for (const tt of temp as []) {
-          const tobj = convert(metaClass.fn, tt);
-          if (tobj != null) {
-            vs.push(tobj);
+      if (temp !== undefined) {
+        if (Array.isArray(temp)) {
+          const vs = new Array<T>();
+          for (const tt of temp as []) {
+            const tobj = convert(metaClass.fn, tt);
+            if (tobj != null) {
+              vs.push(tobj);
+            }
           }
+          value = vs;
+        } else {
+          value = convert(metaClass.fn, temp);
         }
-        value = vs;
-      } else {
-        value = convert(metaClass.fn, temp);
       }
     } else if (metaName?.name == null) {
-      if(data[key]!==undefined) {
+      if (data[key] !== undefined) {
         value = data[key];
       }
     } else {
-      if(data[metaName.name]!==undefined) {
+      if (data[metaName.name] !== undefined) {
         value = data[metaName.name];
       }
     }
@@ -100,7 +102,9 @@ export function convertTo<T extends object, S extends object>(
       value = metaConverter.fn(value, metaConverter.options);
     }
 
-    Reflect.set(obj, key, value);
+    if(value!==undefined) {
+      Reflect.set(obj, key, value);
+    }
   }
 }
 
