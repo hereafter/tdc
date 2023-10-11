@@ -1,6 +1,6 @@
 import { DMeta } from "../dmeta";
 import { DMetaKnownNames } from "../dmeta.values";
-import { DMetaValidator, DScope, DValidateFn } from "../dmeta.object";
+import { DMetaValidator, DScope, DScopeName, DValidateFn } from "../dmeta.object";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +15,7 @@ export function DValidate<O = any>(
     const m=new DMetaValidator<O>();
     m.validators.push(fn);
     m.options=options;
-    m.scope=scope;
+    m.scopeName=DScopeName(scope);
     metas.push(m);
   }
 }

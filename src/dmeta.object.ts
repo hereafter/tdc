@@ -2,6 +2,16 @@ export type DConstructor<T extends object = object> = new () => T;
 
 export type DScope<T extends object = object> = string | null | DConstructor<T>;
 
+export function DScopeName(scope: DScope) {
+  let scopeValue: string | null = null;
+  if ((scope as DConstructor)?.name != null) {
+    scopeValue = (scope as DConstructor).name;
+  } else {
+    scopeValue = scope as string;
+  }
+  return scopeValue;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DConvertFn<T, S = any, O = any> = (
   source: S | null,
@@ -12,7 +22,7 @@ export type DConvertFn<T, S = any, O = any> = (
 export type DValidateFn<O=any> = (value: any|null, options?: O) => string|null;
 
 export class DMetaObject {
-  scope: DScope = null;
+  scopeName: string|null = null;
 }
 
 export class DMetaName extends DMetaObject {

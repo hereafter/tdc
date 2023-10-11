@@ -28,11 +28,11 @@ export class DMeta {
     if (data == null) return null;
 
     for (const meta of data) {
-      if (meta.scope == scope) return meta;
+      if (meta.scopeName==scope) return meta;
     }
 
     for (const meta of data) {
-      if (meta.scope == null) return meta;
+      if (meta.scopeName == null) return meta;
     }
 
     return null;

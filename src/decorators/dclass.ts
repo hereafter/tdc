@@ -1,6 +1,6 @@
 import { DMeta } from "../dmeta";
 import { DMetaKnownNames } from "../dmeta.values";
-import { DConstructor, DMetaClass, DScope } from "../dmeta.object";
+import { DConstructor, DMetaClass, DScope, DScopeName } from "../dmeta.object";
 
 export function DClass<T extends object>(
   t: DConstructor<T>,
@@ -15,7 +15,7 @@ export function DClass<T extends object>(
 
     const m = new DMetaClass<T>();
     m.fn = t;
-    m.scope = scope;
+    m.scopeName=DScopeName(scope);
     metas.push(m);
   };
 }

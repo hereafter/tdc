@@ -1,6 +1,6 @@
 import { DMeta } from "../dmeta";
 import { DMetaKnownNames } from "../dmeta.values";
-import { DMetaName, DScope } from "../dmeta.object";
+import { DMetaName, DScope, DScopeName } from "../dmeta.object";
 
 export function DName(name: string, scope: DScope = null) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +13,7 @@ export function DName(name: string, scope: DScope = null) {
 
     const m = new DMetaName();
     m.name = name;
-    m.scope = scope;
+    m.scopeName=DScopeName(scope);
 
     metas?.push(m);
   };

@@ -1,5 +1,5 @@
 import { DMeta } from "../dmeta";
-import { DMetaObject, DScope } from "../dmeta.object";
+import { DMetaObject, DScope, DScopeName } from "../dmeta.object";
 import { DMetaKnownNames } from "../dmeta.values";
 
 
@@ -12,7 +12,7 @@ export function DIgnore(scope: DScope = null) {
     );
 
     const m=new DMetaObject();
-    m.scope=scope;
+    m.scopeName=DScopeName(scope);
     metas.push(m);
   }
 }

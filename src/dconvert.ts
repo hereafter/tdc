@@ -9,9 +9,10 @@ import {
   DScope,
 } from "./dmeta.object";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function convertTo<T extends object, S extends object>(
   obj: T,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
   scope: DScope<S> = null
 ) {
@@ -64,9 +65,13 @@ export function convertTo<T extends object, S extends object>(
     if (metaClass?.fn != null) {
       let temp: unknown | null = null;
       if (metaName?.name == null) {
-        temp = data[key];
+        if(data[key]!==undefined) {
+          temp = data[key];
+        }
       } else {
-        temp = data[metaName.name];
+        if(data[metaName.name]!==undefined) {
+          temp = data[metaName.name];
+        }
       }
 
       if (Array.isArray(temp)) {
@@ -82,9 +87,13 @@ export function convertTo<T extends object, S extends object>(
         value = convert(metaClass.fn, temp);
       }
     } else if (metaName?.name == null) {
-      value = data[key];
+      if(data[key]!==undefined) {
+        value = data[key];
+      }
     } else {
-      value = data[metaName.name];
+      if(data[metaName.name]!==undefined) {
+        value = data[metaName.name];
+      }
     }
 
     if (metaConverter?.fn != null) {

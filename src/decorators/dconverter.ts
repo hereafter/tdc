@@ -1,6 +1,6 @@
 import { DMeta } from "../dmeta";
 import { DMetaKnownNames } from "../dmeta.values";
-import { DConvertFn, DMetaConverter, DScope } from "../dmeta.object";
+import { DConvertFn, DMetaConverter, DScope, DScopeName } from "../dmeta.object";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function DConvert<T, S = any, O = any>(
@@ -14,7 +14,7 @@ export function DConvert<T, S = any, O = any>(
     const m = new DMetaConverter<T, S, O>();
     m.fn = fn;
     m.options = options;
-    m.scope = scope;
+    m.scopeName=DScopeName(scope);
     metas.push(m);
   };
 }
